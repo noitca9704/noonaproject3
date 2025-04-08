@@ -17,7 +17,7 @@ const Navbar = ({ onSearchClick }) => {
         "아동",
         "H&M Home",
         "Sale",
-        "지속가능성",
+        "신제품",
     ]
     
     useEffect(() => {
