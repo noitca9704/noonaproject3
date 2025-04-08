@@ -17,9 +17,9 @@ const ProductAll = () => {
   }, [])
 
   return (
-    <div>
+    <div className="carc_cont">
       <Container>
-        <Row className="g-4">
+        <Row className="g-4 justify-content-center">
           {productList.map((menu) => (
             <Col key={menu.id} lg={3} md={4} sm={6} xs={12}>
               <ProductCard item={menu} />

@@ -2,8 +2,9 @@
     position: relative;
 }
 
-.ccc{
-    padding: 2% 5%;
+.nav_wrap{
+    padding: 1% 1vw;
+    margin-bottom: 3%;
 }
 
 .search_page{
@@ -96,6 +97,7 @@
     display: flex;
     align-items: center;
     list-style: none;
+    flex-wrap: wrap; /* 줄바꿈 허용 */
 }
 
 .menu_list li{
@@ -131,3 +133,93 @@
     width: 400px;
     flex: 1;
 }
+
+@media screen and (min-width: 3060px) {
+    .product_img {
+      width: 320px;
+      height: 460px;
+    }
+    .card_area {
+      width: 322px;
+    }
+    .menu_list li {
+      width: 180px;
+      font-size: 26px;
+    }
+    .search_box input {
+      width: 600px;
+      font-size: 22px;
+    }
+    .search_button, .login_button {
+      font-size: 28px;
+    }
+  }
+  
+
+  @media screen and (max-width: 3059px) and (min-width: 1920px) {
+    .product_img {
+      width: 280px;
+      height: 400px;
+    }
+    .card_area {
+      width: 282px;
+    }
+    .menu_list li {
+      width: 150px;
+      font-size: 22px;
+    }
+    .search_box input {
+      width: 500px;
+      font-size: 20px;
+    }
+    .search_button, .login_button {
+      font-size: 24px;
+    }
+  }
+  
+  @media screen and (max-width: 1024px) {
+    .menu_list li {
+      width: 100px;
+      font-size: 18px;
+    }
+    .search_box input {
+      width: 300px;
+    }
+    .search_button, .login_button {
+      font-size: 18px;
+    }
+    .sec3 {
+      gap: 20px;
+    }
+  }
+  
+  @media screen and (max-width: 767px) {
+    .logo_area img {
+      width: 100px;
+    }
+    .search_box input {
+      width: 200px;
+    }
+    .search_button, .login_button {
+      font-size: 16px;
+      gap: 5px;
+    }
+    .search_page {
+      flex-direction: column;
+      height: 100vh;
+    }
+    .search_close {
+      top: 5%;
+      right: 5%;
+    }
+  }
+
+
+  @media screen and (max-width: 570px) {
+    .product_row {
+      justify-content: center !important;
+    }
+    .card_area {
+        margin: 0 auto;
+    }
+  }

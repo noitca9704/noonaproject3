@@ -1,14 +1,15 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react'
 
 const Navbar = ({ onSearchClick }) => {
+    
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
 
     const [isHovered, setIsHovered] = useState(false);
 
-    const menuList = [
+    const fullMenuList = [
         "여성",
         "Divided",
         "남성",
@@ -18,8 +19,23 @@ const Navbar = ({ onSearchClick }) => {
         "Sale",
         "지속가능성",
     ]
+    
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 700);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const filteredMenuList = isMobile
+        ? fullMenuList.filter((menu) => menu === "여성" || menu === "남성")
+        : fullMenuList;
+
+
     return (
-        <div className="ccc">
+        <div className="nav_wrap">
             <div className="logo_area">
                 <img
                     src="https://blog.kakaocdn.net/dn/Yt80C/btqDeJAYUBo/JQbTuukRladq2AUOeqgiEK/img.jpg"
@@ -35,7 +51,7 @@ const Navbar = ({ onSearchClick }) => {
             <div className="sec2">
                 <div className="menu_area">
                     <ul className="menu_list">
-                        {menuList.map((menu) => (
+                        {filteredMenuList.map((menu) => (
                             <li key={menu}>{menu}</li>
                         ))}
                     </ul>
