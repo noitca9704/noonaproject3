@@ -2,9 +2,25 @@ import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from 'react-router-dom'
 
-const Navbar = ({ onSearchClick }) => {
-    
+const Navbar = ({ onSearchClick, authenticate, setAuthenticate}) => {
+
+    const navigate = useNavigate();
+
+    const goToLogin = () => {
+        navigate('/login');
+    };
+
+    const goToHome = () => {
+        navigate('/');
+    }
+
+    const logout = () => {
+        setAuthenticate(false);
+        navigate('/');
+      };
+
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
 
     const [isHovered, setIsHovered] = useState(false);
@@ -19,7 +35,7 @@ const Navbar = ({ onSearchClick }) => {
         "Sale",
         "신제품",
     ]
-    
+
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 700);
@@ -46,26 +62,34 @@ const Navbar = ({ onSearchClick }) => {
                         transition: 'transform 0.3s ease-in-out',
                         transform: isHovered ? 'scale(1.1)' : 'scale(1)',
                     }}
+                    onClick={goToHome}
                 />
             </div>
             <div className="sec2">
-                <div className="menu_area">
-                    <ul className="menu_list">
-                        {filteredMenuList.map((menu) => (
-                            <li key={menu}>{menu}</li>
-                        ))}
-                    </ul>
-                </div>
                 <div className="sec3">
                     <div className="search_button" onClick={onSearchClick}>
                         <FontAwesomeIcon size="2x" icon={faSearch} />
                         <div>검색</div>
                     </div>
-                    <div className="login_button">
-                        <FontAwesomeIcon size="2x" icon={faUser} />
-                        <div>로그인</div>
-                    </div>
+                    {authenticate ? (
+                        <div className="login_button" onClick={logout}>
+                            <FontAwesomeIcon size="2x" icon={faUser} />
+                            <div>로그아웃</div>
+                        </div>
+                    ) : (
+                        <div className="login_button" onClick={goToLogin}>
+                            <FontAwesomeIcon size="2x" icon={faUser} />
+                            <div>로그인</div>
+                        </div>
+                    )}
                 </div>
+            </div>
+            <div className="menu_area">
+                <ul className="menu_list">
+                    {filteredMenuList.map((menu) => (
+                        <li key={menu}>{menu}</li>
+                    ))}
+                </ul>
             </div>
 
         </div>

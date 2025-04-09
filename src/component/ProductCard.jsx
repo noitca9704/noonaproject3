@@ -1,12 +1,18 @@
 import React from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router'
 
 const ProductCard = ({ item }) => {
+    const navigate = useNavigate()
+    const showDetail = () => {
+        navigate(`/product/${item.id}`)
+    }
 
     const [isHovered, setIsHovered] = useState(false);
 
     return (
         <div className="card_area"
+            onClick={showDetail}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             style={{

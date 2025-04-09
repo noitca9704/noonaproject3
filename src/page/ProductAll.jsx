@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import ProductCard from '../component/ProductCard'
+import { useSearchParams } from 'react-router'
 
 const ProductAll = () => {
   const [productList, setProductList] = useState([])
-
+  const [query, setQuery] = useSearchParams();
   const getProducts = async () => {
-    let url = 'https://my-json-server.typicode.com/noitca9704/noonaproject3/products'
+    let searchQuery = query.get("q")||"";
+    let url = `https://my-json-server.typicode.com/noitca9704/noonaproject3/products?q=${searchQuery}`
     let response = await fetch(url)
     let data = await response.json()
     setProductList(data)
@@ -14,12 +16,12 @@ const ProductAll = () => {
 
   useEffect(() => {
     getProducts()
-  }, [])
+  }, [query])
 
   return (
     <div className="carc_cont">
       <Container>
-        <Row className="g-4 justify-content-center">
+        <Row className="g-4">
           {productList.map((menu) => (
             <Col key={menu.id} lg={3} md={4} sm={6} xs={12}>
               <ProductCard item={menu} />
