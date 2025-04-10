@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react'
 import SearchPage from './component/SearchPage'
 import PrivateRoute from './route/PrivateRoute'
+import MobileMenu from './component/MobileMenu'
 
 // 1. 전체 상품페이지, 로그인, 상품 상세페이지 o
 
@@ -34,6 +35,19 @@ function App() {
 
   const[isSearchClicked, setIsSearchClicked] = useState(false);
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const fullMenuList = [
+    "여성",
+    "Divided",
+    "남성",
+    "신생아/유아",
+    "아동",
+    "H&M Home",
+    "Sale",
+    "신제품"
+]
+
   useEffect(() => {
     console.log("aaa", authenticate);
   },[authenticate])
@@ -45,12 +59,21 @@ function App() {
   return (
     <div className='wrap'>
       <SearchPage isOpen={isSearchClicked} onClose={() => setIsSearchClicked(false)}/>
-      <Navbar authenticate={authenticate} onSearchClick={handleSearchClick} setAuthenticate={setAuthenticate}/>
+      <Navbar authenticate={authenticate}
+      onSearchClick={handleSearchClick}
+      setAuthenticate={setAuthenticate}
+      onMobileMenuToggle={() => setMobileMenuOpen(prev => !prev)}/>
       <Routes>
         <Route path="/" element={<ProductAll />} />
         <Route path="/login" element={<Login setAuthenticate={setAuthenticate} />} />
         <Route path="/product/:id" element={<PrivateRoute authenticate={authenticate}/>} />
       </Routes>
+      {mobileMenuOpen && (
+        <MobileMenu
+          menuList={fullMenuList}
+          onClose={() => setMobileMenuOpen(false)}
+        />
+      )}
     </div>
   )
 }

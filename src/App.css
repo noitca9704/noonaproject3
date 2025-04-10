@@ -1,10 +1,20 @@
-.wrap{
-    position: relative;
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
-.nav_wrap{
-    padding: 1% 1vw;
-    margin-bottom: 3%;
+.wrap {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.nav_wrap {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 50px;
 }
 
 .search_page{
@@ -19,6 +29,12 @@
     top: -300px;
 }
 
+.hamburger_menu{
+  position: absolute;
+  right: 1rem;
+  align-items: center;
+}
+
 .search_box{
     padding: 10px 15px;
     border-radius: 30px;
@@ -27,10 +43,11 @@
 }
 
 .logo_area {
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
 }
 
 .logo_area img{
@@ -74,14 +91,15 @@
 }
 
 .sec2{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+  display: none;
 }
 
-.sec3{
-    display: flex;
-    gap:50px;
+.sec3 {
+  position: absolute;
+  right: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 
 .menu_area {
@@ -94,12 +112,13 @@
 .menu_list {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     list-style: none;
-    flex-wrap: wrap; /* 줄바꿈 허용 */
+    gap: 30px;
+    padding: 0;
 }
 
 .menu_list li{
-    width: 120px;
     text-align: center;
     cursor: pointer;
 }
@@ -132,7 +151,10 @@
     width: 400px;
     flex: 1;
 }
-
+.d_area1{
+  display: flex;
+  justify-content: center;
+}
 .d_area2{
   display: flex;
   align-items: end;
@@ -189,6 +211,45 @@
     }
     .card_area {
       width: 200px;
+    }
+    .d_area2{
+      margin-top: 50px !important;
+      gap: 15px;
+      font-size: 25px;
+      padding-bottom: 70px;
+    }
+  }
+  @media screen and (max-width: 700px) {
+    .logo_area img {
+      width: 100px;
+    }
+    .sec2{
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+    }
+    .menu_list{
+      display: none !important;
+    }
+    .menu_list li {
+      width: auto !important;
+    }
+    .search_box input {
+      width: 100% !important;
+      max-width: 90vw;
+    }
+    .sec3{
+      display: none !important;
+    }
+    .d_area2{
+      margin-top: 50px !important;
+      gap: 15px;
+      font-size: 18px;
+      padding-bottom: 70px;
+    }
+    .d_img{
+      width: 250px;
     }
   }
  

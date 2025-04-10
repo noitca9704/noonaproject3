@@ -19,7 +19,7 @@ const ProductAll = () => {
   }, [query])
 
   return (
-    <div className="carc_cont">
+    <div className="card_cont">
       <Container>
         <Row className="g-4">
           {productList.map((menu) => (

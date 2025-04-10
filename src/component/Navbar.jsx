@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from 'react-router-dom'
 
-const Navbar = ({ onSearchClick, authenticate, setAuthenticate}) => {
-
+const Navbar = ({ onSearchClick, authenticate, setAuthenticate, onMobileMenuToggle}) => {
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
     const navigate = useNavigate();
+    
+    const fullMenuList = [
+        "여성",
+        "Divided",
+        "남성",
+        "신생아/유아",
+        "아동",
+        "H&M Home",
+        "Sale",
+        "신제품"
+    ]
 
     const goToLogin = () => {
         navigate('/login');
@@ -19,22 +30,11 @@ const Navbar = ({ onSearchClick, authenticate, setAuthenticate}) => {
     const logout = () => {
         setAuthenticate(false);
         navigate('/');
-      };
-
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
+    };
 
     const [isHovered, setIsHovered] = useState(false);
 
-    const fullMenuList = [
-        "여성",
-        "Divided",
-        "남성",
-        "신생아/유아",
-        "아동",
-        "H&M Home",
-        "Sale",
-        "신제품",
-    ]
+
 
     useEffect(() => {
         const handleResize = () => {
@@ -44,11 +44,6 @@ const Navbar = ({ onSearchClick, authenticate, setAuthenticate}) => {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-
-    const filteredMenuList = isMobile
-        ? fullMenuList.filter((menu) => menu === "여성" || menu === "남성")
-        : fullMenuList;
-
 
     return (
         <div className="nav_wrap">
@@ -64,8 +59,6 @@ const Navbar = ({ onSearchClick, authenticate, setAuthenticate}) => {
                     }}
                     onClick={goToHome}
                 />
-            </div>
-            <div className="sec2">
                 <div className="sec3">
                     <div className="search_button" onClick={onSearchClick}>
                         <FontAwesomeIcon size="2x" icon={faSearch} />
@@ -83,14 +76,38 @@ const Navbar = ({ onSearchClick, authenticate, setAuthenticate}) => {
                         </div>
                     )}
                 </div>
+                {isMobile && (
+                    <div className="hamburger_menu" onClick={onMobileMenuToggle}>
+                        <FontAwesomeIcon icon={faBars} size="2x"/>
+                    </div>
+                )}
             </div>
+
             <div className="menu_area">
                 <ul className="menu_list">
-                    {filteredMenuList.map((menu) => (
+                    {fullMenuList.map((menu) => (
                         <li key={menu}>{menu}</li>
                     ))}
                 </ul>
+                <div className="sec2">
+                    <div className="search_button" onClick={onSearchClick}>
+                        <FontAwesomeIcon size="2x" icon={faSearch} />
+                        <div>검색</div>
+                    </div>
+                    {authenticate ? (
+                        <div className="login_button" onClick={logout}>
+                            <FontAwesomeIcon size="2x" icon={faUser} />
+                            <div>로그아웃</div>
+                        </div>
+                    ) : (
+                        <div className="login_button" onClick={goToLogin}>
+                            <FontAwesomeIcon size="2x" icon={faUser} />
+                            <div>로그인</div>
+                        </div>
+                    )}
+                </div>
             </div>
+
 
         </div>
     )
